@@ -7,38 +7,44 @@ float circle(in vec2 _st, in float _radius){
                          dot(dist,dist)*4.0);
 }
 
-void fragment() {
+void fragment() {	
 	vec3 color = vec3(circle(UV,0.2));
 	
+	// Lower right
 	if (UV.x > 0.5 && UV.y > 0.5) {
 		COLOR = vec4( color, 1.0 ) + vec4(0.4,0.6,0.7,0.0);
-	
+		
+		// Half of the shadow
 		if (cos (UV.y) * cos (UV.y) +sin(UV.x) * sin (UV.x) <= 1.) {
 				COLOR = COLOR * .25;
 		}
 	}
 	
+	// Upper Left
 	if (UV.x < 0.5 && UV.y < 0.5) {
 		COLOR = vec4( color, 1.0 ) + vec4(1.5,0.6,0.7,0.0);
 	
+		// Half of the shadow
 		if (cos (UV.y) * cos (UV.y) +sin(UV.x) * sin (UV.x) >= 1.) {
 				COLOR = COLOR * .5;
 		}
-		
-		
 	}
 	
+	// Lower left
 	if (UV.x < 0.5 && UV.y > 0.5) {
 		COLOR = vec4( color, 1.0 ) + vec4(.5,0.9,0.7,0.0);
-		
+
+		// Half of the shadow		
 		if (cos (UV.y - 0.5) * cos (UV.y - 0.5) +sin(UV.x - 0.5) * sin (UV.x - 0.5) >= 1.) {
 				COLOR = COLOR * .5;
 		}
 	}
 
+	// Upper Right
 	if (UV.x > 0.5 && UV.y < .5) {
 		COLOR = vec4( color, 1.0 ) + vec4(.5,0.5,0.7,0.0);	
 		
+		// Half of the shadow
 		if (cos (UV.y - 0.5) * cos (UV.y - 0.5) +sin(UV.x - 0.5) * sin (UV.x - 0.5) >= 1.) {
 				COLOR = COLOR * .5;
 		}

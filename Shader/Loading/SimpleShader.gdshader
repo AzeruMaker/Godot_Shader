@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
-uniform vec4 Progress = vec4(0.75);
+uniform float discover_zone : hint_range(.0, 1.0) = 1.0;
+uniform float rotation_zone : hint_range(1.0, 2.5) = 1.0;
+
 
 // Function for UV Rotation
 vec2 rotateUVmatrinx(vec2 uv, vec2 pivot, float rotation)
@@ -21,8 +23,10 @@ void fragment() {
 	// 1.5 => Begin at right
 	// 2.0 => Begin at btton
 	// 2.5 => begin at left
+
+	vec4 Progress = vec4(discover_zone);
 	vec2 uv = UV;
-	uv = rotateUVmatrinx (uv, vec2 (0.5), PI * 2.5);
+	uv = rotateUVmatrinx (uv, vec2 (0.5), PI * rotation_zone);
 	
 	// Color wanted for foreground
 	vec4 input_color = texture(TEXTURE, UV);
