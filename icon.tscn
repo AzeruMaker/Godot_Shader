@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2xnhr4wdv0q1"]
 
-[ext_resource type="Shader" path="res://Shader/Loading/SimpleShader.gdshader" id="1_djr3t"]
+[ext_resource type="Shader" path="res://Shader/Example/Treadmill.gdshader" id="1_8igk3"]
 [ext_resource type="Texture2D" uid="uid://bv1masyuwh5hr" path="res://icon.svg" id="2_prb8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y40jd"]
-shader = ExtResource("1_djr3t")
-shader_parameter/Progress = Vector4(0.75, 0.75, 0.75, 0.75)
+shader = ExtResource("1_8igk3")
 
 [node name="Icon" type="Sprite2D"]
 material = SubResource("ShaderMaterial_y40jd")
