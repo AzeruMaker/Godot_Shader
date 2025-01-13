@@ -18,7 +18,7 @@ Please feel free to use the licence is
 
 ## Hierarchy
 
-```javascript
+```text
 Shader
 |-> Example (Simple example shader)
 |-> Transition (Ready to use example for transition / Loading)
