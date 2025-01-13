@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
-uniform float progress = 0.8;
+uniform float min_radius : hint_range(0., 1.) = 1.0;
+uniform float discover_zone : hint_range(0., 1.) = 0.125;
 
 float circle(vec2 position, float radius, float feather)
 {
@@ -16,10 +17,10 @@ void fragment() {
 	// "Output the shader with UV"
 	vec2 translate = uv * 2.0 - 1.0;
 
-	float actual_progress = progress / 1200.0;
-	float feather = actual_progress / 2.0;
-	
-	float c = circle(translate, actual_progress, feather) * color_average;
+	// Formula for the circle
+	float actual_progress = min_radius / discover_zone;	
+	float c = circle(translate, actual_progress, 0.0) * color_average;
 
+	// Output the circle
 	COLOR = input_color - vec4(c);	
 }

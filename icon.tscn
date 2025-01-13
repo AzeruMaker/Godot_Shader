@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2xnhr4wdv0q1"]
 
-[ext_resource type="Shader" path="res://Shader/Loading/SimpleShader.gdshader" id="1_wxnrk"]
+[ext_resource type="Shader" path="res://Shader/Loading/SimpleCircleShader.gdshader" id="1_yg3b8"]
 [ext_resource type="Texture2D" uid="uid://bv1masyuwh5hr" path="res://icon.svg" id="2_prb8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y40jd"]
-shader = ExtResource("1_wxnrk")
-shader_parameter/discover_zone = 0.0
-shader_parameter/rotation_zone = 1.0
+shader = ExtResource("1_yg3b8")
+shader_parameter/min_radius = 0.0
+shader_parameter/discover_zone = 0.125
 
 [node name="Icon" type="Sprite2D"]
 material = SubResource("ShaderMaterial_y40jd")
