@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # 1. Checkout du dépôt
+      # 1. Checkout du dépôt avec le jeton
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -36,7 +36,7 @@ jobs:
           git add main.zip
           git commit -m "Update main.zip with latest changes"
 
-      # 5. Pousser les changements dans la branche principale
+      # 5. Pousser les modifications dans la branche principale
       - name: Push changes
         run: |
           git push origin main
