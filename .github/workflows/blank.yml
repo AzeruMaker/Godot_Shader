@@ -1,4 +1,4 @@
-name: Create ZIP on Push
+name: Create ZIP on Push (Windows)
 
 on:
   push:
@@ -14,14 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Créer un fichier ZIP de la branche main
+      # 2. Créer un fichier ZIP en utilisant PowerShell
       - name: Create ZIP file
         run: |
-          zip -r main.zip .
+          powershell -Command "Compress-Archive -Path * -DestinationPath main.zip"
 
       # 3. Télécharger le fichier ZIP en tant qu'artifact
       - name: Upload ZIP file
-        uses: actions/upload-artifact@v4 # Mise à jour vers v4
+        uses: actions/upload-artifact@v4
         with:
           name: main-branch-zip
           path: main.zip
