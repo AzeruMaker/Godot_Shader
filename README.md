@@ -15,7 +15,6 @@ GD Shader for Godot 4.3
 Please feel free to use the licence is 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-
 ## Hierarchy
 
 ```text
