@@ -3,7 +3,6 @@
 
 GD Shader for Godot 4.3
 
-
 ## Roadmap
 
 - Additional transition
