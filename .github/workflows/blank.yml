@@ -1,0 +1,27 @@
+name: Create ZIP on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout du dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Créer un fichier ZIP de la branche main
+      - name: Create ZIP file
+        run: |
+          zip -r main.zip .
+
+      # 3. (Optionnel) Télécharger le fichier ZIP en tant qu'artifact
+      - name: Upload ZIP file
+        uses: actions/upload-artifact@v3
+        with:
+          name: main-branch-zip
+          path: main.zip
