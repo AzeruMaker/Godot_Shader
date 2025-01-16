@@ -19,9 +19,9 @@ jobs:
         run: |
           zip -r main.zip .
 
-      # 3. (Optionnel) Télécharger le fichier ZIP en tant qu'artifact
+      # 3. Télécharger le fichier ZIP en tant qu'artifact
       - name: Upload ZIP file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Mise à jour vers v4
         with:
           name: main-branch-zip
           path: main.zip
