@@ -1,4 +1,4 @@
-name: Create ZIP on Push (Windows)
+name: Update ZIP on Push (Windows)
 
 on:
   push:
@@ -6,35 +6,37 @@ on:
       - main
 
 jobs:
-  create-zip:
+  update-zip:
     runs-on: windows-latest
 
     steps:
       # 1. Checkout du dépôt
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Lister les fichiers dans le répertoire
-      - name: List files in directory
+      # 2. Supprimer l'ancien fichier ZIP s'il existe
+      - name: Remove old ZIP file
         run: |
-          dir
+          if (Test-Path main.zip) {
+            Remove-Item -Force main.zip
+          }
 
-      # 3. Créer un fichier ZIP en utilisant PowerShell
-      - name: Create ZIP file
+      # 3. Créer un nouveau fichier ZIP
+      - name: Create new ZIP file
         run: |
           powershell -Command "Compress-Archive -Path * -DestinationPath main.zip"
 
-      # 4. Vérifier que le fichier ZIP a été créé
-      - name: Check ZIP file existence
+      # 4. Ajouter et committer le nouveau fichier ZIP
+      - name: Commit new ZIP file
         run: |
-          if (!(Test-Path main.zip)) {
-              Write-Error 'ZIP file was not created!'
-              exit 1
-          }
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add main.zip
+          git commit -m "Update main.zip with latest changes"
 
-      # 5. Télécharger le fichier ZIP en tant qu'artifact
-      - name: Upload ZIP file
-        uses: actions/upload-artifact@v4
-        with:
-          name: main-branch-zip
-          path: main.zip
+      # 5. Pousser les changements dans la branche principale
+      - name: Push changes
+        run: |
+          git push origin main
