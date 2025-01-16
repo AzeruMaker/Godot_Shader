@@ -13,19 +13,28 @@ jobs:
       # 1. Checkout du dépôt
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Utilisation du GITHUB_TOKEN
 
-      # 2. Créer un fichier ZIP contenant tous les fichiers du projet
+      # 2. Supprimer l'ancien fichier ZIP s'il existe
+      - name: Delete old ZIP file if it exists
+        run: |
+          if (Test-Path "archive.zip") {
+            Remove-Item "archive.zip" -Force
+          }
+
+      # 3. Créer un fichier ZIP contenant tous les fichiers du projet
       - name: Create ZIP archive
         run: |
           Compress-Archive -Path * -DestinationPath archive.zip  # Crée l'archive sur Windows avec PowerShell
 
-      # 3. Configurer Git pour pouvoir pousser le fichier ZIP dans le dépôt
+      # 4. Configurer Git pour pouvoir pousser le fichier ZIP dans le dépôt
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      # 4. Ajouter l'archive ZIP, faire un commit et le pousser dans le dépôt
+      # 5. Ajouter l'archive ZIP, faire un commit et le pousser dans le dépôt
       - name: Commit and Push ZIP file
         run: |
           git add archive.zip
