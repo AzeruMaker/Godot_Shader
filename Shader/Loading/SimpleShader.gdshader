@@ -3,7 +3,6 @@ shader_type canvas_item;
 uniform float discover_zone : hint_range(.0, 1.0) = 1.0;
 uniform float rotation_zone : hint_range(1.0, 2.5) = 1.0;
 
-
 // Function for UV Rotation
 vec2 rotateUVmatrinx(vec2 uv, vec2 pivot, float rotation)
 {
