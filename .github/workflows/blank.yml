@@ -14,12 +14,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Créer un fichier ZIP en utilisant PowerShell
+      # 2. Lister les fichiers dans le répertoire
+      - name: List files in directory
+        run: |
+          dir
+
+      # 3. Créer un fichier ZIP en utilisant PowerShell
       - name: Create ZIP file
         run: |
           powershell -Command "Compress-Archive -Path * -DestinationPath main.zip"
 
-      # 3. Télécharger le fichier ZIP en tant qu'artifact
+      # 4. Vérifier que le fichier ZIP a été créé
+      - name: Check ZIP file existence
+        run: |
+          if (!(Test-Path main.zip)) {
+              Write-Error 'ZIP file was not created!'
+              exit 1
+          }
+
+      # 5. Télécharger le fichier ZIP en tant qu'artifact
       - name: Upload ZIP file
         uses: actions/upload-artifact@v4
         with:
